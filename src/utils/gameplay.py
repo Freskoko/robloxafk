@@ -26,11 +26,12 @@ def on_round_start(attack,level):
         hold_key("a", 4)
     
     autoit.mouse_click("left", 940, 886)
-
+    time.sleep(1.2)
     if attack == Inputs.ABILITY:
         autoit.send("2")
     if attack == Inputs.SWORD:
-        autoit.send("1")
+        # autoit.send("1")
+        pass #clicks one by itself
 
     return
 
@@ -49,6 +50,33 @@ def regular_gameplay_loop(attack):
     if attack == Inputs.SWORD:
         autoit.mouse_click("left")
         autoit.send("{SPACE}")
+        autoit.mouse_click("left")
 
-    hold_key("w",1)
-    hold_key("s",1)
+    time.sleep(0.5)
+    hold_key("w",0.5)
+    hold_key("s",0.5)
+
+def reset_after_stuck():
+    #280, 40 leave dungeoms
+
+    # time sleep
+
+    #350, 700 proceed
+    
+    # time sleep
+
+    #1000, 600 PLAY
+
+    # 1800,900 PLAY
+
+    # 600, 400 CREATE LOBBY
+
+    #1400,400 JUNGLE
+
+    # 560, 740 , THEN SCROLL DOWN AS MUCH AS POSSIBLE
+
+    # 1350, 800
+
+    #1360, 700
+
+    return

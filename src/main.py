@@ -17,6 +17,8 @@ def main(attack,level):
 
         print(start_values)
         print(retry_values)
+
+
         if "Retry" in retry_values: 
             on_death()
             started = False
@@ -27,6 +29,9 @@ def main(attack,level):
             regular_gameplay_loop(attack)
 
         time.sleep(1)
+
+        #start a timer, after 5 minutes, call the reset 
+        
 
 if __name__ == "__main__":
     attack = Inputs(int(input("what attack, 1 = ability, 2 = sword")))
