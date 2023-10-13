@@ -1,14 +1,17 @@
-import time
-import autoit
 import random
+import time
+
+import autoit
 
 time.sleep(1)
+
 
 def press_and_release(key: str, hold_time: float):
     autoit.send("{%s down}" % key)
     time.sleep(hold_time)
     autoit.send("{%s up}" % key)
     time.sleep(random.uniform(0.1, 0.3))  # Random delay before the next action
+
 
 while True:
     time.sleep(random.uniform(0.9, 1.1))  # Random delay before starting the loop
@@ -25,5 +28,5 @@ while True:
     autoit.send("f down")
     time.sleep(random.uniform(64, 66))
     autoit.send("f up")
-    
+
     time.sleep(random.uniform(0.09, 0.11))
