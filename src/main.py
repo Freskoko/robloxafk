@@ -28,7 +28,7 @@ def main(attack, level):
         now = datetime.datetime.now()
         if now >= reset_time:
             reset_after_time()
-            reset_time = now + datetime.timedelta(minutes=RESET_TIME + 0.4)
+            reset_time = now + datetime.timedffffffffffffffffffffffffffffffffffffffrelta(minutes=RESET_TIME + 0.4)
 
         start_image = ImageGrab.grab(bbox=(800, 850, 1100, 920))
         start_values = pytesseract.image_to_string(start_image)
