@@ -18,7 +18,7 @@ pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Users\Henrik\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 )
 
-RESET_TIME = 2
+RESET_TIME = 4
 
 
 def main(attack, level):
@@ -28,7 +28,7 @@ def main(attack, level):
         now = datetime.datetime.now()
         if now >= reset_time:
             reset_after_time()
-            reset_time = now + datetime.timedffffffffffffffffffffffffffffffffffffffrelta(minutes=RESET_TIME + 0.4)
+            reset_time = now + datetime.timedelta(minutes=RESET_TIME + 0.4)
 
         start_image = ImageGrab.grab(bbox=(800, 850, 1100, 920))
         start_values = pytesseract.image_to_string(start_image)
@@ -42,13 +42,15 @@ def main(attack, level):
         if "Retry" in retry_values:
             on_death()
             started = False
+            reset_time = now + datetime.timedelta(minutes=RESET_TIME + 0.4)
         elif "Start" in start_values:
             on_round_start(attack, level)
             started = True
         elif started == True:
+            
             regular_gameplay_loop(attack)
 
-        time.sleep(1)
+        time.sleep(0.3)
         # start a timer, after 5 minutes, call the reset
 
 

@@ -22,10 +22,10 @@ def hold_key(key, hold_time):
 
 
 def on_round_start(attack, level):
-    hold_key("s", 4)
+    hold_key("s",3.7 )
 
     if level == Levels.JUNGLE:
-        hold_key("a", 4)
+        hold_key("a", 3.5)
 
     autoit.mouse_click("left", 940, 886)
     time.sleep(1.2)
@@ -35,6 +35,18 @@ def on_round_start(attack, level):
         # autoit.send("1")
         pass  # clicks one by itself
 
+    time.sleep(0.3)
+    autoit.mouse_wheel("up", 200)  
+    time.sleep(0.2)
+    autoit.mouse_wheel("down", 200)  
+    time.sleep(0.1)
+
+    # Get the current mouse position
+    current_pos = autoit.mouse_get_pos()
+
+    # Move the mouse to the new position
+    autoit.mouse_move(current_pos[0], current_pos[1] + 35, speed=10)
+
     return
 
 
@@ -42,16 +54,36 @@ def on_death():
     autoit.mouse_click("left", 683, 741)
     print("hi back retry")
 
-
+FIRST_MOVE = True
 def regular_gameplay_loop(attack):
-    # implemented for angel
+    global FIRST_MOVE  # global so can use many times
+
     if attack == Inputs.ABILITY:
-        autoit.send("{SPACE}")
-        time.sleep(0.1)
-        hold_key("f", 3)
+
+        if FIRST_MOVE:
+            autoit.send("c")
+            time.sleep(7)
+            autoit.send("v")
+            FIRST_MOVE = False
+    
         autoit.send("r")
         time.sleep(0.1)
-        autoit.send("{SPACE}")
+
+        autoit.send("f")
+        time.sleep(0.1)
+
+        autoit.send("c")
+        time.sleep(0.1)
+
+        autoit.send("v")
+        time.sleep(0.1)
+
+        # autoit.send("e")
+        # autoit.send("z")
+
+        # autoit.send("g") #dont have it yet
+        # time.sleep(0.1)
+
 
     if attack == Inputs.SWORD:
         autoit.mouse_click("left")
@@ -91,3 +123,14 @@ def reset_after_time():
     autoit.mouse_click("left", 1360, 700)
 
     return
+
+# implemented attack for angel
+# if attack == Inputs.ABILITY:
+#     autoit.send("{SPACE}")
+#     time.sleep(0.1)
+#     hold_key("f", 3)
+#     autoit.send("r")
+#     time.sleep(0.1)
+#     autoit.send("{SPACE}")
+
+#for dragon
