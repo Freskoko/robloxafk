@@ -20,15 +20,19 @@ pytesseract.pytesseract.tesseract_cmd = (
 
 RESET_TIME = 4
 
-
+FIRSTMOVE = True
 def main(attack, level):
+    FIRSTMOVE = True
     started = False
     reset_time = datetime.datetime.now() + datetime.timedelta(minutes=RESET_TIME)
     while True:
         now = datetime.datetime.now()
         if now >= reset_time:
+            
             reset_after_time()
             reset_time = now + datetime.timedelta(minutes=RESET_TIME + 0.4)
+            FIRSTMOVE = True
+            
 
         start_image = ImageGrab.grab(bbox=(800, 850, 1100, 920))
         start_values = pytesseract.image_to_string(start_image)
@@ -43,12 +47,17 @@ def main(attack, level):
             on_death()
             started = False
             reset_time = now + datetime.timedelta(minutes=RESET_TIME + 0.4)
+            FIRSTMOVE = True
         elif "Start" in start_values:
+            FIRSTMOVE = True
             on_round_start(attack, level)
             started = True
+
         elif started == True:
             
-            regular_gameplay_loop(attack)
+            regular_gameplay_loop(attack, FIRSTMOVE)
+
+            FIRSTMOVE = False
 
         time.sleep(0.3)
         # start a timer, after 5 minutes, call the reset

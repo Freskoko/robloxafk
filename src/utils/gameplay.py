@@ -22,10 +22,10 @@ def hold_key(key, hold_time):
 
 
 def on_round_start(attack, level):
-    hold_key("s",3.7 )
+    hold_key("s",3.7)
 
     if level == Levels.JUNGLE:
-        hold_key("a", 3.5)
+        hold_key("a", 3.9)
 
     autoit.mouse_click("left", 940, 886)
     time.sleep(1.2)
@@ -45,7 +45,7 @@ def on_round_start(attack, level):
     current_pos = autoit.mouse_get_pos()
 
     # Move the mouse to the new position
-    autoit.mouse_move(current_pos[0], current_pos[1] + 35, speed=10)
+    autoit.mouse_move(current_pos[0], current_pos[1] + 20, speed=10)
 
     return
 
@@ -55,8 +55,7 @@ def on_death():
     print("hi back retry")
 
 FIRST_MOVE = True
-def regular_gameplay_loop(attack):
-    global FIRST_MOVE  # global so can use many times
+def regular_gameplay_loop(attack, FIRST_MOVE):
 
     if attack == Inputs.ABILITY:
 
@@ -65,18 +64,21 @@ def regular_gameplay_loop(attack):
             time.sleep(7)
             autoit.send("v")
             FIRST_MOVE = False
-    
-        autoit.send("r")
-        time.sleep(0.1)
-
-        autoit.send("f")
-        time.sleep(0.1)
 
         autoit.send("c")
-        time.sleep(0.1)
+        # time.sleep(0.1)
 
         autoit.send("v")
-        time.sleep(0.1)
+        # time.sleep(0.1)
+    
+        autoit.send("r")
+        # time.sleep(0.1)
+
+        autoit.send("f")
+        # time.sleep(0.1)
+
+        autoit.send("g")
+        # time.sleep(0.1)
 
         # autoit.send("e")
         # autoit.send("z")
@@ -101,7 +103,7 @@ def reset_after_time():
     autoit.mouse_click("left", 280, 40)  # leave dungeons
     time.sleep(1)
     autoit.mouse_click("left", 850, 700)  # proceed
-    time.sleep(15)
+    time.sleep(30)
     autoit.mouse_click("left", 1000, 600)  # PLAY
     time.sleep(1)
     autoit.mouse_click("left", 1800, 900)  # PLAY again
