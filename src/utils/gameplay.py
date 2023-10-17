@@ -80,8 +80,8 @@ def regular_gameplay_loop(attack, FIRST_MOVE):
         autoit.send("g")
         # time.sleep(0.1)
 
-        # autoit.send("e")
-        # autoit.send("z")
+        autoit.send("e")
+        autoit.send("z")
 
         # autoit.send("g") #dont have it yet
         # time.sleep(0.1)
@@ -106,7 +106,7 @@ def reset_after_time():
     time.sleep(30)
     autoit.mouse_click("left", 1000, 600)  # PLAY
     time.sleep(1)
-    autoit.mouse_click("left", 1800, 900)  # PLAY again
+    autoit.mouse_click("left", 1710, 900)  # PLAY again
     time.sleep(1)
     autoit.mouse_click("left", 600, 400)  # CREATE LOBBY
     time.sleep(1)

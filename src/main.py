@@ -18,7 +18,7 @@ pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Users\Henrik\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 )
 
-RESET_TIME = 4
+RESET_TIME = 5.5
 
 FIRSTMOVE = True
 def main(attack, level):
