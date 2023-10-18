@@ -5,8 +5,14 @@ import pytesseract
 from loguru import logger
 from PIL import ImageGrab
 
-from utils.gameplay import (Inputs, Levels, on_death, on_round_start,
-                            regular_gameplay_loop, reset_after_time)
+from utils.gameplay import (
+    Inputs,
+    Levels,
+    on_death,
+    on_round_start,
+    regular_gameplay_loop,
+    reset_after_time,
+)
 
 pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Users\Henrik\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
@@ -83,8 +89,14 @@ def main(attack, level):
             FIRSTMOVE = False
 
         if started == True:
-            round_time = now - start_time if start_time else 0
-            logger.info(f"XP = {current_xp_value} time = {round_time}")
+            round_time = now - start_time if start_time else datetime.timedelta(0)
+            total_seconds = int(round_time.total_seconds())
+            minutes = total_seconds // 60
+            seconds = total_seconds % 60
+            current_xp_value_str = str(current_xp_value).strip()
+            logger.info(
+                f"XP:{current_xp_value_str:<12} time:{minutes:02d}:{seconds:02d}"
+            )
 
         time.sleep(0.3)
 
