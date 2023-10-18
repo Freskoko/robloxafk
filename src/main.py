@@ -1,6 +1,8 @@
 import datetime
 import time
 
+import cv2
+import numpy as np
 import pytesseract
 from loguru import logger
 from PIL import ImageGrab
@@ -18,7 +20,16 @@ pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Users\Henrik\AppData\Local\Programs\Tesseract-OCR\tesseract.exe"
 )
 
-RESET_TIME = 1000000000
+
+# class GameHandler():
+#     def __init__(self,):
+#         self.RESET_TIME = 6.5
+#         self.Ch
+
+
+SAVE_IMG = True
+
+RESET_TIME = 6.5
 CHANGE_TIME = 30
 prev_xp_value = None
 change_timestamp = datetime.datetime.now()
@@ -26,7 +37,7 @@ change_timestamp = datetime.datetime.now()
 FIRSTMOVE = True
 
 
-def main(attack, level):
+def main(attack: Inputs, level: Levels):
     global prev_xp_value
     global change_timestamp
     global start_time
@@ -38,14 +49,24 @@ def main(attack, level):
     while True:
         now = datetime.datetime.now()
 
-        xp_image = ImageGrab.grab(bbox=(80, 1010, 145, 1030))
-        current_xp_value = pytesseract.image_to_string(xp_image)
+        xp_image = ImageGrab.grab(bbox=(80, 1010, 150, 1034))
+
+        # convert the image to gray scale
+        gray = cv2.cvtColor(np.array(xp_image), cv2.COLOR_BGR2GRAY)
+
+        # threshold the gray image so that everything not white becomes black
+        _, binary = cv2.threshold(gray, 200, 255, cv2.THRESH_BINARY)
+
+        if SAVE_IMG:
+            cv2.imwrite("utils/imgs/xp_image.png", binary)
+
+        current_xp_value = pytesseract.image_to_string(binary)
 
         if prev_xp_value != current_xp_value:
             prev_xp_value = current_xp_value
             change_timestamp = now
 
-        # RESET AFTER MINUTES -> Not needed since we restart if no xp change, but still nice to have
+        # reset if time has passed the reset thrshold or the xp has not changed for the xp time limit
         if (
             now - change_timestamp > datetime.timedelta(seconds=CHANGE_TIME)
             or now >= reset_time
@@ -64,9 +85,17 @@ def main(attack, level):
             FIRSTMOVE = True
 
         start_image = ImageGrab.grab(bbox=(800, 850, 1100, 920))
+        if SAVE_IMG:
+            start_image.save(
+                "utils/imgs/start_image.png"
+            )  # saves the start_image as start_image.png
         start_values = pytesseract.image_to_string(start_image)
 
         retry_image = ImageGrab.grab(bbox=(600, 700, 690, 760))
+        if SAVE_IMG:
+            retry_image.save(
+                "utils/imgs/retry_image.png"
+            )  # saves the retry_image as retry_image.png
         retry_values = pytesseract.image_to_string(retry_image)
 
         if "Retry" in retry_values:
