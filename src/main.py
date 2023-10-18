@@ -35,7 +35,7 @@ class GameHandler:
     def __init__(
         self,
     ):
-        self.RESET_TIME = 6.5
+        self.RESET_TIME = 9
         self.CHANGE_TIME = 30
         self.FIRSTMOVE = True
         self.SAVE_IMG = True
