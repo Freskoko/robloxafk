@@ -22,7 +22,7 @@ def hold_key(key, hold_time):
 
 
 def on_round_start(attack, level):
-    hold_key("s",3.7)
+    hold_key("s", 3.7)
 
     if level == Levels.JUNGLE:
         hold_key("a", 3.9)
@@ -36,9 +36,9 @@ def on_round_start(attack, level):
         pass  # clicks one by itself
 
     time.sleep(0.3)
-    autoit.mouse_wheel("up", 200)  
+    autoit.mouse_wheel("up", 200)
     time.sleep(0.2)
-    autoit.mouse_wheel("down", 200)  
+    autoit.mouse_wheel("down", 200)
     time.sleep(0.1)
 
     # Get the current mouse position
@@ -54,11 +54,12 @@ def on_death():
     autoit.mouse_click("left", 683, 741)
     print("hi back retry")
 
+
 FIRST_MOVE = True
+
+
 def regular_gameplay_loop(attack, FIRST_MOVE):
-
     if attack == Inputs.ABILITY:
-
         if FIRST_MOVE:
             autoit.send("c")
             time.sleep(7)
@@ -70,7 +71,7 @@ def regular_gameplay_loop(attack, FIRST_MOVE):
 
         autoit.send("v")
         # time.sleep(0.1)
-    
+
         autoit.send("r")
         # time.sleep(0.1)
 
@@ -85,7 +86,6 @@ def regular_gameplay_loop(attack, FIRST_MOVE):
 
         # autoit.send("g") #dont have it yet
         # time.sleep(0.1)
-
 
     if attack == Inputs.SWORD:
         autoit.mouse_click("left")
@@ -126,6 +126,7 @@ def reset_after_time():
 
     return
 
+
 # implemented attack for angel
 # if attack == Inputs.ABILITY:
 #     autoit.send("{SPACE}")
@@ -135,4 +136,4 @@ def reset_after_time():
 #     time.sleep(0.1)
 #     autoit.send("{SPACE}")
 
-#for dragon
+# for dragon

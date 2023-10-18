@@ -1,8 +1,6 @@
-
-import autoit
-
-import autoit
 import time
+
+import autoit
 
 time.sleep(1)
 
