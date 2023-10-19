@@ -1,6 +1,7 @@
 import datetime
 import time
 
+import autoit
 import cv2
 import numpy as np
 import pytesseract
@@ -91,6 +92,22 @@ def main(attack: Inputs, level: Levels, game: GameHandler):
             game.change_timestamp = now
             game.prev_xp_value = None
             game.FIRSTMOVE = True
+
+        # --------
+        # claim button daily
+
+        claim_image = ImageGrab.grab(bbox=(895, 735, 1010, 770))
+        if game.SAVE_IMG:
+            claim_image.save(
+                "utils/imgs/claim_image.png"
+            )  # saves the start_image as start_image.png
+        claim_values = pytesseract.image_to_string(claim_image)
+        if "Claim" in claim_values or "la" in claim_values:
+            claim_image.save(
+                "utils/imgs/claim_image_with_text.png"
+            )  # saves the start_image as start_image.png
+            time.sleep(1)
+            autoit.mouse_click("left", 950, 750)
 
         start_image = ImageGrab.grab(bbox=(800, 850, 1100, 920))
         if game.SAVE_IMG:
