@@ -22,10 +22,10 @@ def hold_key(key, hold_time):
 
 
 def on_round_start(attack, level):
-    hold_key("s", 3.7)
+    hold_key("s", 10)
 
     if level == Levels.JUNGLE:
-        hold_key("a", 3.9)
+        hold_key("a", 3.5)
 
     autoit.mouse_click("left", 940, 886)
     time.sleep(1.2)
@@ -57,8 +57,17 @@ def on_death():
 
 FIRST_MOVE = True
 
+def send_abilities():
+    autoit.send("c")
+    autoit.send("v")
+    autoit.send("r")
+    autoit.send("f")
+    autoit.send("g")
+    autoit.send("e")    
+    autoit.send("z")
 
 def regular_gameplay_loop(attack, FIRST_MOVE):
+
     if attack == Inputs.ABILITY:
         if FIRST_MOVE:
             autoit.send("c")
@@ -66,26 +75,16 @@ def regular_gameplay_loop(attack, FIRST_MOVE):
             autoit.send("v")
             FIRST_MOVE = False
 
-        autoit.send("c")
-        # time.sleep(0.1)
-
-        autoit.send("v")
-        # time.sleep(0.1)
-
-        autoit.send("r")
-        # time.sleep(0.1)
-
-        autoit.send("f")
-        # time.sleep(0.1)
-
-        autoit.send("g")
-        # time.sleep(0.1)
-
-        autoit.send("e")
-        autoit.send("z")
-
-        # autoit.send("g") #dont have it yet
-        # time.sleep(0.1)
+        send_abilities()
+        hold_key("s",4)
+        send_abilities()
+        hold_key("w",4)
+        send_abilities()
+        hold_key("a",4)
+        send_abilities()
+        hold_key("d",8)
+        send_abilities()
+        hold_key("a",4)
 
     if attack == Inputs.SWORD:
         autoit.mouse_click("left")
@@ -110,7 +109,8 @@ def reset_after_time():
     time.sleep(1)
     autoit.mouse_click("left", 600, 400)  # CREATE LOBBY
     time.sleep(1)
-    autoit.mouse_click("left", 1400, 400)  # JUNGLE
+    # autoit.mouse_click("left", 1400, 400)  # JUNGLE
+    autoit.mouse_click("left",800,550) # SNOW CASTLE
     time.sleep(1)
     autoit.mouse_click("left", 560, 740)
     time.sleep(1)

@@ -37,7 +37,7 @@ class GameHandler:
         self,
     ):
         self.RESET_TIME = 9
-        self.CHANGE_TIME = 30
+        self.CHANGE_TIME = 60
         self.FIRSTMOVE = True
         self.SAVE_IMG = True
         self.prev_xp_value = None
